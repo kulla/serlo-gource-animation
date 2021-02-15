@@ -17,7 +17,9 @@ def update_repos(repos_dir):
 def download_repos(repos_dir):
     os.makedirs(repos_dir, exist_ok=True)
 
-    repos = requests.get("https://api.github.com/orgs/serlo/repos", headers = {
+    repos = requests.get("https://api.github.com/orgs/serlo/repos", {
+        "per_page": 100
+    }, headers = {
         "Accept": "application/vnd.github.v3+json"
     }).json()
 
