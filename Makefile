@@ -16,6 +16,7 @@ $(LOG_FILE): $(LOGS)
 
 $(LOGS_DIR)/%.txt: $(REPOS_DIR)/% $(LOGS_DIR)
 	gource --output-custom-log $@ $<
+	sed -i -r "s#(.+)\|#\1|/$(notdir $<)#" $@
 
 $(LOGS_DIR):
 	mkdir $@
