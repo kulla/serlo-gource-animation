@@ -14,5 +14,8 @@ final_logo.png: logo.svg
 $(LOG_FILE): $(LOGS)
 	cat $^ | sort -n > $@
 
-$(LOGS_DIR)/%.txt: $(REPOS_DIR)/%
+$(LOGS_DIR)/%.txt: $(REPOS_DIR)/% $(LOGS_DIR)
 	gource --output-custom-log $@ $<
+
+$(LOGS_DIR):
+	mkdir $@
