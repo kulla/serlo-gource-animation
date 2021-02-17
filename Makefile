@@ -15,7 +15,7 @@ final.mp4: video.mp4
 video.mp4: video.ppm audio.mp3
 	# See https://video.stackexchange.com/a/24481
 	ffmpeg -y -r 30 -f image2pipe -vcodec ppm -i $< -i $(word 2, $^) \
-		-vf yadif,format=yuv420p -force_key_frames "expr:gte(t\,n_forced/2)" \
+		-vf yadif,format=yuv420p -force_key_frames "expr:gte(t,n_forced/2)" \
 		-c:v libx264 -crf 18 -bf 2 -c:a aac -q:a 1 -ac 2 -ar 48000 \
 		-use_editlist 0 -f mp4 -movflags +faststart $@
 
