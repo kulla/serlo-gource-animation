@@ -26,6 +26,9 @@ def download_repos(repos_dir):
     info("%s repositories found" % len(repos))
 
     for repo in repos:
+        if repo["name"] == "issue-development-space":
+            continue
+
         target_dir = os.path.join(repos_dir, repo["name"])
 
         if not os.path.isdir(target_dir):
