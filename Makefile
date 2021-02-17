@@ -10,7 +10,7 @@ LOG_FILE := $(LOGS_DIR)/complete.txt
 all: final.mp4
 
 final.mp4: video.mp4
-	ffmpeg -i $< -t 155 $@
+	ffmpeg -y -i $< -t 155 $@
 
 video.mp4: video.ppm audio.mp3
 	# See https://video.stackexchange.com/a/24481
