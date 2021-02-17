@@ -10,7 +10,7 @@ LOG_FILE := $(LOGS_DIR)/complete.txt
 all: $(LOG_FILE) final_logo.png
 
 final_logo.png: logo.svg
-	convert $< -resize x50 $@
+	inkscape --export-area-page --export-height=50 --export-png=$@ $<
 
 $(LOG_FILE): $(LOGS_SHORTEN)
 	cat $^ | sort -n > $@
