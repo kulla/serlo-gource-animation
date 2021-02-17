@@ -7,10 +7,14 @@ LOGS_SHORTEN := $(addprefix $(LOGS_DIR)/, $(addsuffix .shorten.txt, $(REPOS)))
 LOG_FILE := $(LOGS_DIR)/complete.txt
 
 .PHONY: all
-all: $(LOG_FILE) final_logo.png
+all: video.ppm
+
+video.ppm: $(LOG_FILE) gource.conf final_logo.png
+	gource --load-config gource.conf -r 30 -o video.ppm \
+		-1920x1080 $<
 
 final_logo.png: logo.svg
-	inkscape --export-area-page --export-height=50 --export-png=$@ $<
+	inkscape --export-area-page --export-height=70 --export-png=$@ $<
 
 $(LOG_FILE): $(LOGS_SHORTEN)
 	cat $^ | sort -n > $@
