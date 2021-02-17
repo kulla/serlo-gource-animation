@@ -7,7 +7,12 @@ LOGS_SHORTEN := $(addprefix $(LOGS_DIR)/, $(addsuffix .shorten.txt, $(REPOS)))
 LOG_FILE := $(LOGS_DIR)/complete.txt
 
 .PHONY: all
-all: video.ppm
+all: video.mp4
+
+video.mp4: video.ppm audio.mp3
+	ffmpeg -y -r 30 -f image2pipe -vcodec ppm -i $< -i $(word 2, $^) \
+		-c:v libx264 -preset veryslow -crf 22 -f mp4 -movflags +faststart \
+		-c:a aac -b:a 192k $@
 
 video.ppm: $(LOG_FILE) gource.conf final_logo.png
 	gource --load-config gource.conf -r 30 -o video.ppm \
