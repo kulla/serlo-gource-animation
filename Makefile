@@ -33,3 +33,6 @@ $(LOGS_DIR)/%.raw.txt: $(REPOS_DIR)/% $(LOGS_DIR)
 
 $(LOGS_DIR):
 	mkdir $@
+
+$(REPOS_DIR)/%:
+	python update_repos.py
