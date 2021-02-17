@@ -20,7 +20,7 @@ video.mp4: video.ppm audio.mp3
 		-use_editlist 0 -f mp4 -movflags +faststart $@
 
 video.ppm: $(LOG_FILE) gource.conf final_logo.png
-	gource --load-config gource.conf -r 30 -o video.ppm \
+	./gource/gource --load-config $(word 2,$^) -r 30 -o video.ppm \
 		-1920x1080 $<
 
 final_logo.png: logo.svg
