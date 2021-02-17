@@ -7,7 +7,10 @@ LOGS_SHORTEN := $(addprefix $(LOGS_DIR)/, $(addsuffix .shorten.txt, $(REPOS)))
 LOG_FILE := $(LOGS_DIR)/complete.txt
 
 .PHONY: all
-all: video.mp4
+all: final.mp4
+
+final.mp4: video.mp4
+	ffmpeg -i $< -t 155 $@
 
 video.mp4: video.ppm audio.mp3
 	ffmpeg -y -r 30 -f image2pipe -vcodec ppm -i $< -i $(word 2, $^) \
