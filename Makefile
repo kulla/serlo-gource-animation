@@ -41,3 +41,7 @@ $(LOGS_DIR):
 
 $(REPOS_DIR)/%:
 	python update_repos.py
+
+.PHONY: clean
+clean:
+	git clean -f -X
